@@ -10,5 +10,4 @@ int work(char *args[]) {
         perror("execvp");
         return -1;
     }
-    return 0;
 }
