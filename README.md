@@ -17,15 +17,15 @@ For example:
 ```
 # Starting client
 ```
-./client IP:PORT <command> [args...]
+./client IP:PORT spawn <command> [args...]
 ```
 For example:
 ```
-./server 0.0.0.0:31337 ls --all
+./client 0.0.0.0:31337 spawn ls --all
 ```
 Another example:
 ```
-./server 0.0.0.0:31337 wc
+./client 0.0.0.0:31337 spawn wc
 >>> Aba caba racada
 >>> CTRL+D
 <<<       1       3      16
