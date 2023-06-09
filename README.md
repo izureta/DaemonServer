@@ -1,4 +1,5 @@
 # DaemonServer
+Проект по акосу, сделана только самая базовая часть.
 Daemon server for remote execution.
 # Setup
 ```
