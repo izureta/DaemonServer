@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
         printf("Usage: ./server PORT.\n");
         return 0;
     }
-    daemon(0, 0);
+    daemon(1, 0);
     pid_t pid = fork();
     if (pid < 0) {
         perror("fork");
