@@ -62,7 +62,6 @@ int main(int argc, char *argv[]) {
         }
         _exit(EXIT_SUCCESS);
     }
-    printf("%d\n", getpgrp());
     set_signal_handler();
     server_pid = pid;
     char buf[BUF_SIZE] = {0};
