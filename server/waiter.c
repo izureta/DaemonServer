@@ -7,9 +7,18 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+void wait_for_child() {
+    int status;
+    while (waitpid(-1, &status, WNOHANG) > 0);
+}
+
 int wait_for_connections(int server_sock) {
+    struct sigaction sigchld_sa = {
+        .sa_handler = wait_for_child,
+        .sa_flags = SA_RESTART | SA_NOCLDSTOP,
+    };
+    sigaction(SIGCHLD, &sigchld_sa, NULL);
     int sock;
-    int child_count = 0;
     while (1) { 
         if ((sock = accept(server_sock, NULL, NULL)) < 0) {
             perror("accept");
@@ -25,13 +34,10 @@ int wait_for_connections(int server_sock) {
                 }
                 close(sock);
                 _exit(EXIT_SUCCESS);
-            } else {
-                ++child_count;
             }
         }
     }
-    for (int i = 0; i < child_count; i++) {
-        wait(NULL);
-    }
+    int status;
+    while (waitpid(-1, &status, 0) >= 0);
     return 0;
 }
